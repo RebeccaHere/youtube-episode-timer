@@ -13,6 +13,9 @@ var timePassed = 0
 # minutesPassed is the current amount of minutes passed
 var minutesPassed = 0
 
+# hoursPassed is the current amount of hours passed
+var hoursPassed = 0
+
 # episode start is an variable to check if the episode is still running or not
 # if the start episode button has been pressed and the stop episode button has
 # not been pressed then this will always be true if not this will be false
@@ -50,12 +53,23 @@ func _on_timer_timeout() -> void:
 		timePassed = 0
 		minutesPassed += 1
 	
+	if minutesPassed == 59:
+		minutesPassed = 0
+		timePassed = 0
+		hoursPassed += 1
+		
 	# increments the time passed (seconds) by 1
 	timePassed += 1
 	
 	# set the display text to the minutes and seconds passed
+	# example 1:2:58 - 2 being the minutes and 58 being the seconds 1 being hours passed
+	if hoursPassed != 0:
+		timer_passed.set_text(str(hoursPassed)+":"+str(minutesPassed)+ ":" + str(timePassed))
+		
 	# example 2:58 - 2 being the minutes passed and 58 being the seconds
-	timer_passed.set_text(str(minutesPassed)+ ":" + str(timePassed))
+	elif hoursPassed == 0:
+		timer_passed.set_text(str(minutesPassed)+ ":" + str(timePassed))
+		
 	
 	# if the episodeStarted is still true then we repeate the timer again
 	# the default value of the timer is set to be 1 second so this will run every second
