@@ -10,7 +10,6 @@ this program is still in early development so its preaty bear bones
 
 - add obs integration
 
-- add an hour counter
 
 
 
