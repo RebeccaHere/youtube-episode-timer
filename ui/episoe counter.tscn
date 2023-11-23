@@ -1,0 +1,49 @@
+[gd_scene load_steps=2 format=3 uid="uid://be157crbtfdxh"]
+
+[ext_resource type="Script" path="res://ui/counter.gd" id="1_e10e1"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_e10e1")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HFlowContainer" type="HFlowContainer" parent="CenterContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="timer" type="Label" parent="CenterContainer/HFlowContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 141
+text = "0:0"
+
+[node name="startEpisode" type="Button" parent="CenterContainer/HFlowContainer"]
+process_priority = 1
+process_physics_priority = 1
+layout_mode = 2
+text = "start episode"
+
+[node name="stopEpisode" type="Button" parent="CenterContainer/HFlowContainer"]
+process_priority = 1
+process_physics_priority = 1
+layout_mode = 2
+text = "stop episode"
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="pressed" from="CenterContainer/HFlowContainer/startEpisode" to="." method="_on_start_episode_pressed"]
+[connection signal="pressed" from="CenterContainer/HFlowContainer/stopEpisode" to="." method="_on_stop_episode_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
